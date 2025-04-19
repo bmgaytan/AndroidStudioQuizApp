@@ -22,12 +22,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         quizModelList = mutableListOf()
+        getDataFromFirebase()
     }
 
-    private fun getDataFronFirebase(){
+    private fun getDataFromFirebase(){
         //dummy data
         quizModelList.add(QuizModel("1","Programming","Basic Programming","10"))
         quizModelList.add(QuizModel("2","Computers","Computer Questions","15"))
         quizModelList.add(QuizModel("3","Geography","Geography Questions","20"))
+        setupRecyclerView()
+    }
+
+    private fun setupRecyclerView() {
+        TODO("Not yet implemented")
     }
 }
