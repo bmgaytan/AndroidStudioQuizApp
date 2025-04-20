@@ -1,5 +1,7 @@
 package com.example.onlinequiz
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,11 +11,16 @@ class QuizListAdapter(private val quizModelList : List<QuizModel>) :
     RecyclerView.Adapter<QuizListAdapter.MyViewHolder>() {
 
     class MyViewHolder(private val binding: QuizItemRecyclerRowBinding) : RecyclerView.ViewHolder(binding.root){
+        @SuppressLint("SetTextI18n")
         fun bind(model: QuizModel){
             binding.apply { this
                 quizTitleText.text = model.title
                 quizSubtitleText.text = model.subtitle
-                quizTimer.text = model.time
+                quizTimer.text = model.time + " min"
+                root.setOnClickListener {
+                    val intent = Intent(root.context, QuizActivity::class.java)
+                    root.context.startActivity(intent)
+                }
             }
         }
     }
