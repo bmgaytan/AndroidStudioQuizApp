@@ -10,9 +10,10 @@ class QuizListAdapter(private val quizModelList : List<QuizModel>) :
 
     class MyViewHolder(private val binding: QuizItemRecyclerRowBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(model: QuizModel){
-            //bind all the views
-            binding.apply {
+            binding.apply { this
                 quizTitleText.text = model.title
+                quizSubtitleText.text = model.subtitle
+                quizTimer.text = model.time
             }
         }
     }
@@ -22,13 +23,12 @@ class QuizListAdapter(private val quizModelList : List<QuizModel>) :
         return MyViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(quizModelList[position])
-    }
-
     override fun getItemCount(): Int {
         return quizModelList.size
     }
 
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.bind(quizModelList[position])
+    }
 
 }
