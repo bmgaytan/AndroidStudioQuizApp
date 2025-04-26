@@ -128,7 +128,7 @@
                 android:text="Next"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:id="@+id/mextButton"
+                android:id="@+id/nextButton"
                 android:paddingHorizontal="40dp"
                 tools:ignore="HardcodedText" />
 
