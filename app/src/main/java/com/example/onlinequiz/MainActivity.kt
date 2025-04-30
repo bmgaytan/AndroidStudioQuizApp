@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         listQuestionModel.add(QuestionModel("Who owns Android?", mutableListOf("Apple", "Microsoft", "Google", "Samsung"), "Google"))
 
 
-        quizModelList.add(QuizModel("1","Programming","Basic Programming","10", listQuestionModel))
+        quizModelList.add(QuizModel("1","Programming","Description","10", listQuestionModel))
         /*quizModelList.add(QuizModel("2","Computers","Computer Questions","15"))
         quizModelList.add(QuizModel("3","Geography","Geography Questions","20"))*/
         setupRecyclerView()

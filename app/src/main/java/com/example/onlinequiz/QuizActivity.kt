@@ -1,6 +1,7 @@
 package com.example.onlinequiz
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.onlinequiz.databinding.ActivityQuizBinding
+import com.example.onlinequiz.databinding.ScoredialogueBinding
+import kotlinx.coroutines.selects.select
 
 class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -69,6 +72,11 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     private fun loadQuestions(){
+        selectedAnswer = ""
+        if(currentQuestionIndex == questionModelList.size) {
+            finishQuiz()
+            return
+        }
         binding.apply {
             questionLayout.text = "Question ${currentQuestionIndex + 1}/${questionModelList.size}"
             progressBar.progress = (currentQuestionIndex.toFloat() / questionModelList.size.toFloat() * 100).toInt()
@@ -100,6 +108,25 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             //answer is clicked
             selectedAnswer = clickedBtn.text.toString()
             clickedBtn.setBackgroundColor(getColor(R.color.orange))
+        }
+    }
+
+    private fun finishQuiz(){
+        val totalQuestions = questionModelList.size
+        val percentage = ((score.toFloat() / totalQuestions.toFloat()) * 100).toInt()
+
+        val dialogueBinding = ScoredialogueBinding.inflate(layoutInflater)
+        dialogueBinding.apply {
+            scoreProgressBar.progress = percentage
+            scoreProgressText.text = "$percentage %"
+            if(percentage>60){
+                scoreTitle.text = "Congrats you have passed!"
+                scoreTitle.setTextColor(Color.BLUE)
+            }else{
+                scoreTitle.text = "Oops you have failed"
+                scoreTitle.setTextColor(Color.RED)
+            }
+            scoreSubtitle.text ="$score out of $totalQuestions are correct"
         }
     }
 
