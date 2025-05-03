@@ -1,6 +1,7 @@
 package com.example.onlinequiz
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -8,6 +9,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onlinequiz.databinding.ActivityMainBinding
 import com.example.onlinequiz.databinding.ActivityQuizBinding
+import com.google.firebase.Firebase
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.getValue
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -30,7 +34,24 @@ class MainActivity : AppCompatActivity() {
         getDataFromFirebase()
     }
 
-    private fun getDataFromFirebase(){
+    private fun getDataFromFirebase() {
+        binding.progressBar.visibility = View.VISIBLE
+        FirebaseDatabase.getInstance().reference
+            .get()
+            .addOnSuccessListener { dataSnapshot->
+                if(dataSnapshot.exists()){
+                    for (snapshot in dataSnapshot.children){
+                        val quizModel = snapshot.getValue(QuizModel::class.java)
+                        if (quizModel != null){
+                            quizModelList.add(quizModel)
+                        }
+                    }
+                }
+                setupRecyclerView()
+            }
+    }
+
+    /*private fun getDataFromFirebase(){
         //dummy data
 
         val listQuestionModel = mutableListOf<QuestionModel>()
@@ -39,14 +60,16 @@ class MainActivity : AppCompatActivity() {
 
 
         quizModelList.add(QuizModel("1","Programming","Description","10", listQuestionModel))
-        /*quizModelList.add(QuizModel("2","Computers","Computer Questions","15"))
-        quizModelList.add(QuizModel("3","Geography","Geography Questions","20"))*/
+        quizModelList.add(QuizModel("2","Computers","Computer Questions","15"))
+        quizModelList.add(QuizModel("3","Geography","Geography Questions","20"))
         setupRecyclerView()
-    }
-
+    }*/
     private fun setupRecyclerView() {
+        binding.progressBar.visibility = View.GONE
         adapter = QuizListAdapter(quizModelList)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
     }
+
+
 }

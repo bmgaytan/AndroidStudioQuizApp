@@ -7,6 +7,7 @@ import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -61,10 +62,8 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 binding.timerTextview.text = String.format("%02d:%02d", minutes, remainingSeconds)
 
             }
-
             override fun onFinish() {
-                TODO("Not yet implemented")
-                //finish the quiz
+               finishQuiz()
             }
 
         }.start()
@@ -86,6 +85,10 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
             button1.text = questionModelList[currentQuestionIndex].options[1]
             button2.text = questionModelList[currentQuestionIndex].options[2]
             button3.text = questionModelList[currentQuestionIndex].options[3]
+            button0.setBackgroundColor(getColor(R.color.grey))
+            button1.setBackgroundColor(getColor(R.color.grey))
+            button2.setBackgroundColor(getColor(R.color.grey))
+            button3.setBackgroundColor(getColor(R.color.grey))
         }
     }
 
@@ -98,6 +101,9 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
         }
         val clickedBtn = view as Button
         if(clickedBtn.id==R.id.nextButton){
+            if(selectedAnswer.isEmpty()){
+                Toast.makeText(applicationContext,"Please select an answer", Toast.LENGTH_SHORT).show()
+            }
             if (selectedAnswer == questionModelList[currentQuestionIndex].correct){
                 score++
                 Log.i("Score of Quiz", score.toString())
