@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "98481155700",
+    "project_id": "swep2quizapp",
+    "storage_bucket": "swep2quizapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98481155700:android:a840b174eb007f235aeb21",
+        "android_client_info": {
+          "package_name": "com.example.onlinequiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgWEQo_cUMnT3kEZJUsrCvnV-XGebTU8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

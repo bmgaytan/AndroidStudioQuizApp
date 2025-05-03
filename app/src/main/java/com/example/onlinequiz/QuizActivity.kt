@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -127,7 +128,14 @@ class QuizActivity : AppCompatActivity(), View.OnClickListener {
                 scoreTitle.setTextColor(Color.RED)
             }
             scoreSubtitle.text ="$score out of $totalQuestions are correct"
+            finishButton.setOnClickListener {
+                finish()
+            }
         }
+        AlertDialog.Builder(this)
+            .setView(dialogueBinding.root)
+            .setCancelable(false)
+            .show()
     }
 
 }
