@@ -50,20 +50,6 @@ class MainActivity : AppCompatActivity() {
                 setupRecyclerView()
             }
     }
-
-    /*private fun getDataFromFirebase(){
-        //dummy data
-
-        val listQuestionModel = mutableListOf<QuestionModel>()
-        listQuestionModel.add(QuestionModel("What is Android?", mutableListOf("Language", "OS", "Product", "None"), "OS"))
-        listQuestionModel.add(QuestionModel("Who owns Android?", mutableListOf("Apple", "Microsoft", "Google", "Samsung"), "Google"))
-
-
-        quizModelList.add(QuizModel("1","Programming","Description","10", listQuestionModel))
-        quizModelList.add(QuizModel("2","Computers","Computer Questions","15"))
-        quizModelList.add(QuizModel("3","Geography","Geography Questions","20"))
-        setupRecyclerView()
-    }*/
     private fun setupRecyclerView() {
         binding.progressBar.visibility = View.GONE
         adapter = QuizListAdapter(quizModelList)
